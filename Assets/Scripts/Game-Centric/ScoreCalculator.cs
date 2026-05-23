@@ -27,6 +27,7 @@ public class ScoreCalculator : MonoBehaviour
         // Calculation for score deduction
         foreach (TruckExtensionsCoordinator.Extension selectedExtension in truckExtensionSelect.ReturnSelectedExtensions())
         {
+            Debug.Log(truckExtensionsCoord.retrieveExtensionComponent(selectedExtension).pointCost);//
             scoreDeductionFromExtensions += truckExtensionsCoord.retrieveExtensionComponent(selectedExtension).pointCost;
         }
         scoreDeductionFromExtensions *= 1.25f;

@@ -70,7 +70,7 @@ public class GameWizard : MonoBehaviour
     public void linkUpScoreCalculator(ScoreCalculator scoreCalculator) { scoreCalculator.setTruckExtensionSelection(truckExtensionSelection); scoreCalculator.setTruckExtensionsCoordinator(truckExtensionsCoordinator); } // Sets Truck Extensions Coordinator + Selection for scoreCalculator
     
     // Function to hook up Truck Extension Selection to TruckExtensionsToPlayerCommunicator
-    public void linkUpTruckExtensionsToPlayerCommunicator(TruckExtensionsToPlayerCommunicator truckExtensionsToPlayerCommunicator) { }
+    public void linkUpTruckExtensionsToPlayerCommunicator(TruckExtensionsToPlayerCommunicator truckExtensionsToPlayerCommunicator) { truckExtensionsToPlayerCommunicator.setTruckExtensionSelection(truckExtensionSelection); }
 
     // Sets the level that the player selected, saving it in the Game Wizard
     // NOTE: As stated previously, the reason why the selected level is stored in an enum instead of just a string is because strings strangely go null upon changing scene. This func accepts a string solely

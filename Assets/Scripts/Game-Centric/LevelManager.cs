@@ -21,7 +21,6 @@ public class LevelManager : MonoBehaviour, IObserver
         timerForThisLevel.setUIElement(UITimer); // Setting UI element for level timer
 
         this.thisLevelScoreCalc = this.gameObject.GetComponentInChildren<ScoreCalculator>(); // Assigns child ScoreCalculator object as script's ScoreCalculator reference
-        Debug.Log(thisLevelScoreCalc);
 
         thisLevelStartPoint.Subscribe("PlayerCrossedStartLine", this); // Subscribes to signal for player crossing level's starting line
         thisLevelEndPoint.Subscribe("PlayerCrossedFinishLine", this); // Subscribes to signal for player crossing level's finish line

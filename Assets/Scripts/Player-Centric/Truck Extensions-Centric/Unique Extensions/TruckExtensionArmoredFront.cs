@@ -11,6 +11,14 @@ public class TruckExtensionArmoredFront : TruckExtension
     // Adjustable parameters
     public float ramForce = 50.0f; // The force with which a rammed object is hit
 
+    public override void OnDisable()
+    {
+        base.OnDisable();
+
+        // Sets the entire gameObject to false, which will be reversed if the Extension is enabled
+        this.gameObject.SetActive(false);
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         if (this.thisExtensionActive)

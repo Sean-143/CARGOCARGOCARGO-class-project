@@ -14,8 +14,10 @@ public class TruckExtensionsCoordinator : MonoBehaviour
     {
         SpeedExtension,
         BoostExtension,
+        BounceExtension,
         ArmoredFrontExtension,
         SlipExtension,
+        InvisibleExtension,
     }
 
     public GameObject truck = null; // Holds the Player Truck

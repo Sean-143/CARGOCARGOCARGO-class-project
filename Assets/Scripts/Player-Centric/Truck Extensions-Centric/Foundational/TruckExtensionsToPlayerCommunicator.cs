@@ -37,10 +37,63 @@ public class TruckExtensionsToPlayerCommunicator : MonoBehaviour
         actualStats.moveSpeed = speedExt.increasedMoveSpeed;
     }
 
+    // Sets up the necessary functionality for the Armored Front extension (if it's active)
+    private void armoredFrontExtensionService()
+    {
+        // Grabs the Armored Front Extension component, before enabling its GameObject (the Armored Front Extension script disables the gameObject OnDisable)
+        TruckExtensionArmoredFront armFrntExt = (TruckExtensionArmoredFront)truckExtensionsCoordinator.retrieveExtensionComponent(TruckExtensionsCoordinator.Extension.ArmoredFrontExtension);
+        armFrntExt.gameObject.SetActive(true);
+    }
+
     // Sets up the necessary functionality for the Bounce extension (if it's active)
     private void bounceExtensionService()
     {
+        TruckExtensionBounce bncExt = (TruckExtensionBounce)truckExtensionsCoordinator.retrieveExtensionComponent(TruckExtensionsCoordinator.Extension.BounceExtension);
+        BoxCollider truckCollider = playerTruck.GetComponent<BoxCollider>();
 
+        truckCollider.material = bncExt.getBouncePhysics();
+    }
+
+    // Calls the appropriate Extension service function based on the extension inputted
+    private void performExtensionService(TruckExtensionsCoordinator.Extension extensionToBeServiced)
+    {
+        switch (extensionToBeServiced)
+        {
+            case TruckExtensionsCoordinator.Extension.SpeedExtension:
+                speedExtensionService();
+                break;
+            case TruckExtensionsCoordinator.Extension.BoostExtension:
+                
+                break;
+            case TruckExtensionsCoordinator.Extension.ArmoredFrontExtension:
+                armoredFrontExtensionService();
+                break;
+            case TruckExtensionsCoordinator.Extension.SlipExtension:
+
+                break;
+            case TruckExtensionsCoordinator.Extension.InvisibleExtension:
+                // No service needed
+                break;
+            case TruckExtensionsCoordinator.Extension.BounceExtension:
+                bounceExtensionService();
+                break;
+        }
+    }
+
+    // Hooks up the truck according to extensions selected in TruckExtensionSelection
+    private void hookUpTruck()
+    {
+        foreach (TruckExtensionsCoordinator.Extension selectedExtension in truckExtensionSelection.ReturnSelectedExtensions())
+        {
+            performExtensionService(selectedExtension);
+        }
+        // Special implementation to normalize speed if SpeedExtension isn't activated
+        if (!truckExtensionSelection.ReturnSelectedExtensions().Contains(TruckExtensionsCoordinator.Extension.SpeedExtension))
+        {
+            actualStats.moveSpeed = playerTruck.baseMoveSpeed;
+        }
+
+        actualStats.turnSpeed = playerTruck.baseTurnSpeed; // Turn speed is always set to the same by default, unless an Extension that adjusts turn speed is introduced at some point
     }
 
     private void Start()
@@ -48,14 +101,8 @@ public class TruckExtensionsToPlayerCommunicator : MonoBehaviour
         // Links up this object
         GameWizard.instanceFetch.linkUpTruckExtensionsToPlayerCommunicator(this);
 
-        if (truckExtensionSelection.ReturnSelectedExtensions().Contains(TruckExtensionsCoordinator.Extension.SpeedExtension))
-        {
-            speedExtensionService();
-        }
-        else
-        {
-            actualStats.moveSpeed = playerTruck.baseMoveSpeed;
-            actualStats.turnSpeed = playerTruck.baseTurnSpeed;
-        }
+        // hookUpExtensions is called to...well, hook up all extensions
+        // NOTE: Invoke is used so that function call runs after TruckExtensionCoordinator's own Start() function runs, which sets up the dictionary containing all Extension components
+        Invoke("hookUpTruck", 0.1f);
     }
 }
