@@ -3,7 +3,6 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
-using static UnityEditor.VersionControl.Asset;
 
 // The (soon-to-be) Singleton manager that handles and assigns the extensions
 

@@ -22,7 +22,7 @@ public class TestCarBehavior : MonoBehaviour
         this.moveAction = InputSystem.actions.FindAction("Move");
     }
 
-    void Update()
+    /*void Update()
     {
         moveInput = moveAction.ReadValue<Vector2>();
     }
@@ -38,5 +38,5 @@ public class TestCarBehavior : MonoBehaviour
         backLeftWheel.motorTorque = motorSim;
         frontRightWheel.steerAngle = steerSim;
         frontLeftWheel.steerAngle = steerSim;
-    }
+    }*/
 }
