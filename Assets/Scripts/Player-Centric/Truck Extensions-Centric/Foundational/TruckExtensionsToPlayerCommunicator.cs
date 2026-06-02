@@ -10,10 +10,17 @@ public class TruckExtensionsToPlayerCommunicator : MonoBehaviour
 
     private TruckExtensionSelection truckExtensionSelection = null;
 
+    private TruckExtensionBoost bstExtGlobal;
+    private TruckExtensionJump jumpExtGlobal;
+
     public struct playerTruckStats
     {
         public float moveSpeed; // The move speed of the player truck
         public float turnSpeed; // The turn speed of the player truck
+        public float jumpIntensity; // The intensity with which the player truck jumps (if jumping is enabled)
+        public float boostSpeed; // The speed at which the player will boost forward (if boosting is enabled)
+        public float boostDuration; // The period of time the player boosts forwward for (if boosting is enabled)
+        public float boostCooldown; // The time before the player can successively boost again (if boosting is enabled)
     }
 
     // The playerTruckStats object that holds the definitive, universal player truck stats
@@ -53,6 +60,35 @@ public class TruckExtensionsToPlayerCommunicator : MonoBehaviour
         truckCollider.material = bncExt.getBouncePhysics();
     }
 
+    // Sets up the necessary functionality for the Precision Control extension (if it's active)
+    private void precisionControlExtensionService()
+    {
+        // Simply calls togglePrecisionMovement(). This would be done in the OnEnable() of the extension itself if it were possible
+        playerTruck.togglePrecisionMovement();
+    }
+
+    // Sets up the necessary functionality for the Jump extension (if it's active)
+    private void jumpExtensionService()
+    {
+        // Calls toggleJump(). This would be done in the OnEnable() of the extension itself if it were possible
+        playerTruck.toggleJump();
+
+        TruckExtensionJump jumpExt = (TruckExtensionJump)truckExtensionsCoordinator.retrieveExtensionComponent(TruckExtensionsCoordinator.Extension.JumpExtension);
+        actualStats.jumpIntensity = jumpExt.actualJumpIntensity;
+    }
+
+    // Sets up the necessary functionality for the Boost extension (if it's active)
+    private void boostExtensionService()
+    {
+        // Calls toggleBoost(). This would be done in the OnEnable() of the extension itself if it were possible
+        playerTruck.toggleBoost();
+
+        bstExtGlobal = (TruckExtensionBoost)truckExtensionsCoordinator.retrieveExtensionComponent(TruckExtensionsCoordinator.Extension.BoostExtension);
+        actualStats.boostSpeed = bstExtGlobal.actualBoostSpeed;
+        actualStats.boostDuration = bstExtGlobal.actualBoostDuration;
+        actualStats.boostCooldown = bstExtGlobal.actualBoostCooldown;
+    }
+
     // Calls the appropriate Extension service function based on the extension inputted
     private void performExtensionService(TruckExtensionsCoordinator.Extension extensionToBeServiced)
     {
@@ -62,13 +98,13 @@ public class TruckExtensionsToPlayerCommunicator : MonoBehaviour
                 speedExtensionService();
                 break;
             case TruckExtensionsCoordinator.Extension.BoostExtension:
-                
+                boostExtensionService();
                 break;
             case TruckExtensionsCoordinator.Extension.ArmoredFrontExtension:
                 armoredFrontExtensionService();
                 break;
-            case TruckExtensionsCoordinator.Extension.SlipExtension:
-
+            case TruckExtensionsCoordinator.Extension.PrecisionControlExtension:
+                precisionControlExtensionService();
                 break;
             case TruckExtensionsCoordinator.Extension.InvisibleExtension:
                 // No service needed
@@ -76,8 +112,20 @@ public class TruckExtensionsToPlayerCommunicator : MonoBehaviour
             case TruckExtensionsCoordinator.Extension.BounceExtension:
                 bounceExtensionService();
                 break;
+            case TruckExtensionsCoordinator.Extension.JumpExtension:
+                jumpExtensionService();
+                break;
         }
     }
+
+    /*// Scrapped implementation to perform a jump by brokering a function call between PlayerController and TruckExtensionJump
+    public void performJumpViaExtension()
+    {
+
+    }
+
+    // Scrapped implementation to perform a boost by brokering a function call between PlayerController and TruckExtensionBoost
+    public void performBoostViaExtension() { bstExtGlobal.beginBoost(); }*/
 
     // Hooks up the truck according to extensions selected in TruckExtensionSelection
     private void hookUpTruck()
