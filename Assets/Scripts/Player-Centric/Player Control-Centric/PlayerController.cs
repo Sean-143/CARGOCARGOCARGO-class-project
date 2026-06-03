@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     // Regarding jump functionality
     private bool jumpOn = false;
+    //public Transform truckFoot; // The bottom of the truck, used for shooting out a RayCast (Scrapped)
+    public LayerMask groundMask; // LayerMask corresponding to the ground
 
     // Regarding boost functionality
     private bool boostOn = false; // Holds whether boost is currently active (as per Boost Extension)
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         executeMovement();
-        if (jumpOn && (jumpAction.ReadValue<float>() != 0.0f))
+        if (jumpOn && (jumpAction.ReadValue<float>() != 0.0f) && checkGrounding())
         {
             performJump();
         }
@@ -82,7 +84,7 @@ public class PlayerController : MonoBehaviour
         {
             boostCooldownTimeElapsed += Time.deltaTime;
             if (boostCooldownTimeElapsed >= truckExtensionsCommunicator.actualStats.boostCooldown) { boostCooldownActive = false; }
-        }    
+        }
     }
 
     // Toggles precision movement on. There isn't a way to toggle it off, since this'll only ever be run once (if it's run at all) right before the level begins
@@ -206,5 +208,14 @@ public class PlayerController : MonoBehaviour
     private void performJump()
     {
         this.rb.AddForce(Vector3.up * truckExtensionsCommunicator.actualStats.jumpIntensity, ForceMode.Impulse);
+    }
+
+    private bool checkGrounding()
+    {
+        //Ray groundCast = new Ray(truckFoot.position, Vector3.down);
+
+        //Debug.DrawRay(groundCast.origin, groundCast.direction, Color.green);//
+        //Debug.DrawRay(this.transform.position, this.transform.up * -1, Color.green);//
+        return (Physics.Raycast(this.transform.position, this.transform.up * -1, 0.75f, groundMask));
     }
 }

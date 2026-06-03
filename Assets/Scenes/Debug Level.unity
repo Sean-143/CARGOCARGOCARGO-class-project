@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 147141615}
   - component: {fileID: 147141614}
   - component: {fileID: 147141613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 10th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 177123643}
   - component: {fileID: 177123642}
   - component: {fileID: 177123646}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Start Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 524011276}
   - component: {fileID: 524011275}
   - component: {fileID: 524011274}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Finish Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1513,7 +1513,7 @@ GameObject:
   - component: {fileID: 562126006}
   - component: {fileID: 562126005}
   - component: {fileID: 562126004}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 2nd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3910,6 +3910,37 @@ Transform:
   - {fileID: 683743229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1294356158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294356159}
+  m_Layer: 0
+  m_Name: Truck Foot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1294356159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294356158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1811607183}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355317687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,7 +3954,7 @@ GameObject:
   - component: {fileID: 1355317690}
   - component: {fileID: 1355317689}
   - component: {fileID: 1355317688}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 7th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4296,7 +4327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5e9037bae52051458d4e36d93ba25c5, type: 3}
       propertyPath: m_Name
-      value: Gam3B Box assets (1)
+      value: Packages Model 2nd
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4666,7 +4697,7 @@ GameObject:
   - component: {fileID: 1472987540}
   - component: {fileID: 1472987539}
   - component: {fileID: 1472987538}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 1st
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4806,7 +4837,7 @@ GameObject:
   - component: {fileID: 1475978828}
   - component: {fileID: 1475978827}
   - component: {fileID: 1475978826}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 11th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4946,7 +4977,7 @@ GameObject:
   - component: {fileID: 1479887691}
   - component: {fileID: 1479887690}
   - component: {fileID: 1479887689}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 5th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5206,7 +5237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3646f78283e180341b4827d2af0beae3, type: 3}
       propertyPath: m_Name
-      value: CargoTruckModel
+      value: Player Truck Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5271,7 +5302,7 @@ GameObject:
   - component: {fileID: 1574342281}
   - component: {fileID: 1574342280}
   - component: {fileID: 1574342279}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 4th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5594,7 +5625,7 @@ GameObject:
   - component: {fileID: 1625540985}
   - component: {fileID: 1625540984}
   - component: {fileID: 1625540983}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 3rd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5847,7 +5878,7 @@ GameObject:
   - component: {fileID: 1788023943}
   - component: {fileID: 1788023942}
   - component: {fileID: 1788023941}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 6th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6009,6 +6040,7 @@ Transform:
   m_Children:
   - {fileID: 181247320}
   - {fileID: 380120439}
+  - {fileID: 1294356159}
   - {fileID: 1454083154}
   - {fileID: 987282118}
   m_Father: {fileID: 0}
@@ -6062,7 +6094,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   boostAction:
-    m_Name: 
+    m_Name: Boost
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: b7fd4e77-46e4-4a18-b11b-b581ecd199ec
@@ -6071,7 +6103,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   jumpAction:
-    m_Name: 
+    m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 27ee4b1a-7878-4f21-9745-010c13cb87b6
@@ -6082,6 +6114,9 @@ MonoBehaviour:
   baseMoveSpeed: 10
   baseTurnSpeed: 2
   forward: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!65 &1811607186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6442,7 +6477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5e9037bae52051458d4e36d93ba25c5, type: 3}
       propertyPath: m_Name
-      value: Gam3B Box assets
+      value: Packages Model 1st
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6635,7 +6670,7 @@ GameObject:
   - component: {fileID: 2010156463}
   - component: {fileID: 2010156462}
   - component: {fileID: 2010156461}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 9th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6977,7 +7012,7 @@ GameObject:
   - component: {fileID: 2137536626}
   - component: {fileID: 2137536625}
   - component: {fileID: 2137536624}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road 8th
   m_TagString: Untagged
   m_Icon: {fileID: 0}
