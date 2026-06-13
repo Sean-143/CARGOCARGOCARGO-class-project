@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
         executeMovement();
         if (jumpOn && (jumpAction.ReadValue<float>() != 0.0f) && checkGrounding())
         {
+            Debug.Log("Jump man!");//
             performJump();
         }
 
