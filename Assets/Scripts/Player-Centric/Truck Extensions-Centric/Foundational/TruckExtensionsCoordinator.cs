@@ -3,6 +3,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 // The (soon-to-be) Singleton manager that handles and assigns the extensions
 
@@ -17,10 +18,12 @@ public class TruckExtensionsCoordinator : MonoBehaviour
         ArmoredFrontExtension,
         SlipExtension,
         InvisibleExtension,
+        PrecisionControlExtension,
+        JumpExtension,
     }
 
     public GameObject truck = null; // Holds the Player Truck
-    public TruckExtensionsToPlayerCommunicator truckExtensionsCommunicator = null; // Holds the mediator between truck extensions and player
+    private TruckExtensionsToPlayerCommunicator truckExtensionsCommunicator = null; // Holds the mediator between truck extensions and player
 
     //private List<TruckExtension> activeExtensions; // Holds all currently active extensions (what's the point of this again?)
     private Dictionary<Extension, TruckExtension> allExtensions = new Dictionary<Extension, TruckExtension>(); // Holds references to each component representing each extension, with enum as the key and the actual component as the value

@@ -5,7 +5,7 @@ public class TruckExtensionSpeed : TruckExtension
     public override TruckExtensionsCoordinator.Extension thisTruckExtension => TruckExtensionsCoordinator.Extension.SpeedExtension;
     public override float pointCost => 25.0f;
 
-    public float increasedMoveSpeed = 15.0f;
+    public float increasedMoveSpeed = 25.0f;
 
     /*
     private float baseMoveSpeed; // Holds the pre-establsihed base move speed for easy switching back

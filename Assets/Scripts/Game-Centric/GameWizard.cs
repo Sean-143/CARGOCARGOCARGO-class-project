@@ -13,17 +13,18 @@ public class GameWizard : MonoBehaviour
     private TruckExtensionsCoordinator truckExtensionsCoordinator;
     private TruckExtensionSelection truckExtensionSelection;
 
-    // enum for level designators
-    public enum levelDesig
+    // enum for level designators, scrapped
+    /*public enum levelDesig
     {
         debuglvl,
         lvl1,
         lvl2,
         lvl3
-    }
+    }*/
 
-    // NOTE: The level the player chooses is stored as an enum because when previously attempting to store it as a string, that string would strangely become null upon changing scenes
-    private levelDesig levelSelected;
+    // NOTE: The level the player chooses is stored as an int through PlayerPrefs. Previously, when attempting to store it as a string, that string would strangely become null upon changing
+    // scenes. After that, an enum was tested, but the variable would reset to the default enum value (debuglvl) instead. Using PlayerPrefs is the solution I found
+    //private levelDesign levelSelected;
 
     public static GameWizard instanceFetch
     {
@@ -77,10 +78,11 @@ public class GameWizard : MonoBehaviour
     // so it can be called by a button (I would like to have this func's argument be the levelDesig enum, but you can't use those kinds of functions from a button)
     public void LevelSelected(string setLevel)
     {
-        if (setLevel == "Debug Level") { levelSelected = levelDesig.debuglvl; }
-        else if (setLevel == "Level 1") { levelSelected = levelDesig.lvl1; }
-        else if (setLevel == "Level 2") { levelSelected = levelDesig.lvl2; }
-        else if (setLevel == "Level 3") { levelSelected = levelDesig.lvl3; }
+        if (setLevel == "Debug Level") { PlayerPrefs.SetInt("lvlSelected", 0); }
+        else if (setLevel == "Level 1") { PlayerPrefs.SetInt("lvlSelected", 1); }
+        else if (setLevel == "Level 2") { PlayerPrefs.SetInt("lvlSelected", 2); }
+        else if (setLevel == "Level 3") { PlayerPrefs.SetInt("lvlSelected", 3); }
+        PlayerPrefs.Save();
     }
 
     // NOTE: The reason why the two below functions are separate instead of just one with an if statement branching off into loading the specified scene or the previously selected level is because of the
@@ -88,19 +90,19 @@ public class GameWizard : MonoBehaviour
     // an argument at all
     // Chagnes scene to previously selected level
     public void ChangeSceneIntoLevel() 
-    { 
-        switch (levelSelected)
+    {
+        switch (PlayerPrefs.GetInt("lvlSelected"))
         {
-            case levelDesig.debuglvl:
+            case 0:
                 SceneManager.LoadScene("Debug Level");
                 break;
-            case levelDesig.lvl1:
+            case 1:
                 SceneManager.LoadScene("Level 1");
                 break;
-            case levelDesig.lvl2:
+            case 2:
                 SceneManager.LoadScene("Level 2");
                 break;
-            case levelDesig.lvl3:
+            case 3:
                 SceneManager.LoadScene("Level 3");
                 break;
         }

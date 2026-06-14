@@ -9,16 +9,24 @@ public class TruckExtensionInvisible : TruckExtension
     public override float pointCost => -50.0f;
 
     // MeshRenderers to hold the MeshRenderer for both of the truck's model components
-    public MeshRenderer bodyRenderer;
-    public MeshRenderer headRenderer;
+    public GameObject truckModelParent;
+    private MeshRenderer[] allRenderers;
+
+    // Start is used to get the MeshRenderers for every other individual model a part of the truck
+    private void Start()
+    {
+        allRenderers = truckModelParent.gameObject.GetComponentsInChildren<MeshRenderer>();
+    }
 
     // Makes truck's MeshRenderer's visible upon being disabled
     public override void OnDisable()
     {
         base.OnDisable();
 
-        bodyRenderer.enabled = true;
-        headRenderer.enabled = true;
+        foreach (MeshRenderer otherRenderer in allRenderers)
+        {
+            otherRenderer.enabled = true;
+        }
     }
 
     // Makes truck's MeshRenderer's invisible upon being disabled
@@ -26,7 +34,12 @@ public class TruckExtensionInvisible : TruckExtension
     {
         base.OnEnable();
 
-        bodyRenderer.enabled = false;
-        headRenderer.enabled = false;
+        if (allRenderers != null)
+        {
+            foreach (MeshRenderer otherRenderer in allRenderers)
+            {
+                otherRenderer.enabled = false;
+            }
+        }
     }
 }
