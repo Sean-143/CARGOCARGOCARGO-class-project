@@ -224,6 +224,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &336326954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336326956}
+  - component: {fileID: 336326955}
+  m_Layer: 0
+  m_Name: Extension Buttons Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &336326955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336326954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ebaa782015b3b4cb25ca060831cdce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExtensionButtonManager
+  extensionButtons:
+  - {fileID: 1170386690}
+  - {fileID: 1715390294}
+  - {fileID: 1243020093}
+  - {fileID: 590648740}
+  - {fileID: 493999316}
+  - {fileID: 663027703}
+  - {fileID: 761253299}
+--- !u!4 &336326956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336326954}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1861.5836, y: -0.00003, z: 12957.725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &372869661
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +446,18 @@ MonoBehaviour:
           m_StringArgument: BounceExtension
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Bounce Extension Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &493999317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +589,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: BoostExtension
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Boost Extension Button
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &590648741
@@ -936,6 +1012,18 @@ MonoBehaviour:
           m_StringArgument: JumpExtension
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Jump Extension Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &663027704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,6 +1155,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: InvisibleExtension
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Invisible Extension Button
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &761253300
@@ -1641,6 +1741,18 @@ MonoBehaviour:
           m_StringArgument: PrecisionControlExtension
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Precision Control Extension Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1170386691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1772,6 +1884,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: SpeedExtension
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Speed Extension Button
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1243020094
@@ -2585,6 +2709,18 @@ MonoBehaviour:
           m_StringArgument: ArmoredFrontExtension
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 336326955}
+        m_TargetAssemblyTypeName: ExtensionButtonManager, Assembly-CSharp
+        m_MethodName: changeButtonAppearance
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Armored Front Extension Button
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1715390295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3089,3 +3225,4 @@ SceneRoots:
   - {fileID: 128782672}
   - {fileID: 1168876872}
   - {fileID: 2090986412}
+  - {fileID: 336326956}

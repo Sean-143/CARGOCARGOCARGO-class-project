@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour, IObserver
     private ScoreCalculator thisLevelScoreCalc = null;
 
     public TextMeshProUGUI UITimer = null; // The UI element that'll display the time
+    public TextMeshProUGUI scoreDisplay = null; // The UI element that displays the score upon the level's end
     private LevelTimer timerForThisLevel = null; // Creates a var for a new LevelTimer attributed to this level specifically
 
     private void Start()
@@ -52,5 +53,6 @@ public class LevelManager : MonoBehaviour, IObserver
         float finalScore = thisLevelScoreCalc.CalculateScore(remainingTime); // Calculates the final score, using the Score Calculator
 
         Debug.Log("Final Score: " + finalScore); // Temporary messsage manually outputting player's final score
+        scoreDisplay.text = ("Clear!\nFinal Score: " + finalScore);
     }
 }

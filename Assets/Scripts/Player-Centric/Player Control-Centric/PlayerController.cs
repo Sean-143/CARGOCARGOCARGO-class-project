@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     // Components of the GameObject
     private Rigidbody rb;
+    private BoxCollider boxCollider;
     private TruckExtensionsToPlayerCommunicator truckExtensionsCommunicator;
 
     // Adjustable parameters
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     // Regarding normal movement functionality
     public Vector3 forward;
-    private float moveSpeedScaler = 75.0f; // Universally scales movement speed of truck, for adjusting speed across the board
+    private float moveSpeedScaler = 75.0f; // Universally scales movement speed of truck, for adjusting speed
 
     // Regarding precision movement functionality
     private bool precisionMovementOn = false;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
         // Assigning components
         rb = this.GetComponent<Rigidbody>();
+        boxCollider = this.GetComponent<BoxCollider>();
         truckExtensionsCommunicator = this.GetComponentInChildren<TruckExtensionsToPlayerCommunicator>();
         this.characterController = this.GetComponent<CharacterController>();
 
@@ -65,16 +67,9 @@ public class PlayerController : MonoBehaviour
         truckExtensionsCommunicator.actualStats.turnSpeed = baseTurnSpeed;
     }
 
-    // Update function
-    void FixedUpdate()
+    // Basic update function used for boosting
+    private void Update()
     {
-        executeMovement();
-        if (jumpOn && (jumpAction.ReadValue<float>() != 0.0f) && checkGrounding())
-        {
-            Debug.Log("Jump man!");//
-            performJump();
-        }
-
         if (boostOn && (boostAction.ReadValue<float>() != 0.0f) && !boostActive && !boostCooldownActive) { beginBoost(); }
         if (boostTimeActive)
         {
@@ -84,14 +79,31 @@ public class PlayerController : MonoBehaviour
         if (boostCooldownActive)
         {
             boostCooldownTimeElapsed += Time.deltaTime;
-            if (boostCooldownTimeElapsed >= truckExtensionsCommunicator.actualStats.boostCooldown) { boostCooldownActive = false; }
+            if (boostCooldownTimeElapsed >= truckExtensionsCommunicator.actualStats.boostCooldown)
+            { 
+                boostCooldownActive = false;
+                boostCooldownTimeElapsed = 0.0f;
+            }
+        }
+    }
+
+    // FixedUpdate function used for movement and jumping calculations
+    void FixedUpdate()
+    {
+        executeMovement();
+        if (jumpOn && (jumpAction.ReadValue<float>() != 0.0f) && checkGrounding())
+        {
+            performJump();
         }
     }
 
     // Toggles precision movement on. There isn't a way to toggle it off, since this'll only ever be run once (if it's run at all) right before the level begins
     public void togglePrecisionMovement()
-    { 
+    {
         precisionMovementOn = true;
+        boxCollider.enabled = false; // Switches off the BoxCollider to avoid physics conflicts
+        rb.useGravity = false; // Switches off gravity usage in Rigidbody, as gravity is manually calculated
+        rb.constraints = RigidbodyConstraints.FreezeAll; // Activates all Rigidbody constraints to prevent interference with manual physics calculations
         characterController.enabled = true; // Sets Character Controller to active (in the inspector, it's set to inactive by default)
     }
 
@@ -110,6 +122,9 @@ public class PlayerController : MonoBehaviour
     // Executes basic movement of truck (temp, will likely be replaced as more factors are introduced that'll influence truck controlability)
     void executeMovement()
     {
+        // Changes forward to whatever current forward is
+        this.forward = transform.forward;
+
         // Reads the player's input
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
@@ -138,9 +153,6 @@ public class PlayerController : MonoBehaviour
         // Movement and rotation actually applied to player
         this.rb.AddForce(moveDir * truckExtensionsCommunicator.actualStats.moveSpeed * moveSpeedScaler * Time.deltaTime, ForceMode.Force);
         this.transform.Rotate(turnDir, Space.Self);
-
-        // Changes forward to whatever current forward is
-        this.forward = transform.forward;
     }
 
     void precisionMovement(Vector3 moveDir, Vector3 turnDir)
@@ -172,9 +184,16 @@ public class PlayerController : MonoBehaviour
         this.velocity += Physics.gravity * Time.deltaTime;
 
         // Handling movement and turning
-        moveDir *= truckExtensionsCommunicator.actualStats.moveSpeed;
+        float precisionMoveSpeedScaler = 3.5f; // Move speed scaler specifically to bring Precision Controlled-truck up to decent speed
+        moveDir *= truckExtensionsCommunicator.actualStats.moveSpeed * precisionMoveSpeedScaler;
         moveDir.y = this.velocity.y;
         moveDir *= Time.deltaTime;
+
+        /*Vector3 movement = Vector3.zero;
+        Vector2 moveInput = this.moveAction.ReadValue<Vector2>();
+        movement += moveInput.y * this.transform.forward;
+        movement *= truckExtensionsCommunicator.actualStats.moveSpeed;
+        movement *= Time.deltaTime;*/
 
         this.characterController.Move(moveDir);
         this.transform.Rotate(turnDir, Space.Self);
@@ -196,11 +215,9 @@ public class PlayerController : MonoBehaviour
 
     private void boostEnds()
     {
-        // Indicates that boost has concluded
-        boostActive = false;
-
-        // Blocks timer functionality
-        boostTimeActive = false; // Flag set to false will halt timer counting in Update() function
+        boostActive = false; // Indicates that boost has concluded
+        boostTimeActive = false; // Blocks timer functionality; flag set to false will halt timer counting in Update() function
+        boostCooldownActive = true; // Sets boostCooldownActive to true to begin boost cooldown
 
         // Sets moveSpeed back to what its base value
         truckExtensionsCommunicator.actualStats.moveSpeed = prevSpeed;
